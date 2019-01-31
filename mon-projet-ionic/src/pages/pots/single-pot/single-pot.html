@@ -1,0 +1,86 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button clear (click)="dismissModal()">Fermer</button>
+    </ion-buttons>
+    <ion-title>{{pot.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card [ngClass]="{'is-on': pot.isOpen, 'is-off': !pot.isOpen}">
+    <ion-card-header>Montant total du pot</ion-card-header>
+    <ion-card-content>
+      <p>{{pot.value}}€</p>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card [ngClass]="{'is-on': pot.isOpen, 'is-off': !pot.isOpen}">
+    <ion-card-header>Description</ion-card-header>
+    <ion-card-content>
+      <p *ngFor="let line of pot.description">{{line}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card [ngClass]="{'is-on': pot.isOpen, 'is-off': !pot.isOpen}">
+    <ion-card-header>Membres</ion-card-header>
+    <ion-card-content>
+      <p *ngFor="let line of pot.membres">{{line}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card [ngClass]="{'is-on': pot.isOpen, 'is-off': !pot.isOpen}">
+    <ion-card-header>Activité</ion-card-header>
+    <ion-card-content>
+      <p *ngFor="let line of pot.activites; let i = index"> -{{i+1}}: {{ line.name }}:
+                                            {{line.value }}€ <br>
+                                            Membre:  {{ line.membre }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button
+                  full
+                  color="danger"
+                  [disabled]="!pot.isOpen"
+                  (click)="onTogglePot()">Fermer
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button
+                  full
+                  color="secondary"
+                  [disabled]="pot.isOpen"
+                  (click)="onTogglePot()">Ouvrir
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!--<form [formGroup]="potForm">
+    <ion-list>
+    <ion-item-divider>Activité</ion-item-divider>
+      <div formArrayName="activite">
+        <ion-item *ngFor="let control of getActiviteArray().controls; let i = index">
+          <ion-icon item-start
+            name="remove-circle"
+            color="danger"
+            (click)="onRemoveActivite(i)">
+          </ion-icon>
+          <ion-input [formControlName]="i" placeholder="{{i+1}}."></ion-input>
+      </ion-item>
+    </div>
+  </ion-list>
+  <button ion-button full (click)="onAddActivite()">Ajouter une Activite</button>
+
+  <button ion-button full color="secondary" (click)="onSubmitFormm()">Enregistrer</button>
+
+</form>-->
+
+</ion-content>
